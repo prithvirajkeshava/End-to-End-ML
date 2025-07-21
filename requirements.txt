@@ -5,4 +5,9 @@ numpy
 flask 
 seaborn
 setuptools
--e .
+scikit-learn
+xgboost
+catboost
+matplotlib
+dill
+#-e .
