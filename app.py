@@ -21,6 +21,7 @@ def predict_datapoint():
         return render_template('home.html')
     else:
         try:
+            print("Form submitted")
             data = CustomData(
                 gender=request.form.get('gender'),
                 race_ethnicity=request.form.get('ethnicity'),
@@ -32,15 +33,23 @@ def predict_datapoint():
             )
 
             pred_df = data.get_data_as_data_frame()
+            print("DataFrame created:")
+            print(pred_df)
+
             predict_pipeline = PredictPipeline()
+            print("Pipeline initialized")
+
             results = predict_pipeline.predict(pred_df)
+            print("Prediction successful:", results)
 
             return render_template('home.html', results=results[0])
 
         except Exception as e:
-            # Optional: log error
-            print("Prediction failed:", e)
+            import traceback
+            print("Prediction failed:")
+            traceback.print_exc()
             return render_template('home.html', results="Error during prediction")
+
 
 
 # Port setup for Render
